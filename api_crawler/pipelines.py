@@ -52,7 +52,7 @@ class UnsplashImagePipeline:
             txt_dir.mkdir(parents=True, exist_ok=True)
         self.txt_path = (
             txt_dir
-            / f"{config.PEXELS_QUERY.replace(' ', '-')}_{config.UNSPLASH_IMAGE_TYPE}_{config.PEXELS_PAGES}_{config.PEXELS_PER_PAGE}.txt"
+            / f"{config.UNSPLASH_QUERY.replace(' ', '-')}_{config.UNSPLASH_IMAGE_TYPE}_{config.UNSPLASH_PAGES}_{config.UNSPLASH_PER_PAGE}.txt"
         )
 
         self.img_dir = Path(img_dir)
