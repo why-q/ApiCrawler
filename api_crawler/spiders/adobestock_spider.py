@@ -1,7 +1,6 @@
 import re
 
 import scrapy
-from bs4 import BeautifulSoup
 
 import api_crawler.config as config
 
@@ -15,7 +14,7 @@ class AdobeStockSpider(scrapy.Spider):
         "ITEM_PIPELINES": {"api_crawler.pipelines.AdobeStockPipeline": 1},
     }
 
-    base_url = "https://stock.adobe.com/search/images?filters%5Bcontent_type%3Aphoto%5D=1&filters%5Bcontent_type%3Aillustration%5D=1&filters%5Bcontent_type%3Azip_vector%5D=1&filters%5Bcontent_type%3Avideo%5D=0&filters%5Bcontent_type%3Atemplate%5D=0&filters%5Bcontent_type%3A3d%5D=0&filters%5Bcontent_type%3Aaudio%5D=0&filters%5Binclude_stock_enterprise%5D=0&filters%5Bcontent_type%3Aimage%5D=1&k={query}&order=relevance&safe_search=1&price%5B%24%5D=1&limit=100&search_type=pagination&search_page={page}&load_type=page&get_facets=0"
+    base_url = "https://stock.adobe.com/search?filters%5Bcontent_type%3Aphoto%5D=1&filters%5Bcontent_type%3Aimage%5D=1&filters%5Bgentech%5D=exclude&filters%5Breleases%3Ais_include%5D=1&k={query}&order=relevance&safe_search=1&limit=100&search_type=pagination&search_page={page}&get_facets=0"
 
     header = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",

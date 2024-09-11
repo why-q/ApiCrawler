@@ -14,7 +14,8 @@ class IstockSpider(scrapy.Spider):
         "LOG_FILE": config.ISTOCK_LOG_PATH,
         "ITEM_PIPELINES": {"api_crawler.pipelines.IstockImagePipeline": 1},
     }
-    base_url = "https://www.istockphoto.com/search/2/image?phrase={query}&page={page}"
+
+    base_url = "https://www.istockphoto.com/search/2/image?excludenudity=false&mediatype=photography&numberofpeople=one&phrase={query}&sort=best&page={page}"
 
     header = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
@@ -59,11 +60,11 @@ class IstockSpider(scrapy.Spider):
             image_url = img.get("src")
             if image_url:
                 """
-                    Get image id from src:
+                Get image id from src:
 
-                    src is like: https://media.istockphoto.com/id/600096494/zh/%E7%85%A7%E7%89%87/half-face-of-young-man.jpg?s=612x612&w=0&k=20&c=q5W_9Tl6QvG_NzBmcSXYbq3pnqzwAZOokYkc6Y4Kg0I=
+                src is like: https://media.istockphoto.com/id/600096494/zh/%E7%85%A7%E7%89%87/half-face-of-young-man.jpg?s=612x612&w=0&k=20&c=q5W_9Tl6QvG_NzBmcSXYbq3pnqzwAZOokYkc6Y4Kg0I=
 
-                    id is: 600096494
+                id is: 600096494
                 """
                 match = re.search(r"/id/(\d+)/", image_url)
                 if match:

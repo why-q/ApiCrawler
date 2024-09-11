@@ -1,9 +1,9 @@
 import json
+from typing import Literal
 
 import scrapy
 
 import api_crawler.config as config
-from typing import Literal
 
 
 class UnsplashSpider(scrapy.Spider):

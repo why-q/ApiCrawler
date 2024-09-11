@@ -32,7 +32,7 @@ HUABAN_PER_PAGE = 100
 
 
 # freepik
-FREEPIK_QUERY = "face"
+FREEPIK_QUERY = "face"  # bare face, nomakeup face,
 FREEPIK_IMAGE_DIR = "./datas/imgs/freepik"
 FREEPIK_IMAGE_URL_TXT_DIR = "./datas/docs/freepik"
 FREEPIK_LOG_PATH = "./logs/freepik.log"
@@ -40,7 +40,7 @@ FREEPIK_PAGES = "1"  # max page is 100, cannot work with per_page
 
 
 # istock
-ISTOCK_QUERY = "face"
+ISTOCK_QUERY = "face"  # bare face, bare-face, nomakeup face, nomakeup-face
 ISTOCK_IMAGE_DIR = "./datas/imgs/istock"
 ISTOCK_IMAGE_URL_TXT_DIR = "./datas/docs/istock"
 ISTOCK_LOG_PATH = "./logs/istock.log"
@@ -48,7 +48,7 @@ ISTOCK_PAGES = "1"  # max page is 100, cannot work with per_page
 
 
 # gettyimages
-GETTYIMAGES_QUERY = "face"
+GETTYIMAGES_QUERY = "face"  # bare face
 GETTYIMAGES_IMAGE_DIR = "./datas/imgs/gettyimages"
 GETTYIMAGES_IMAGE_URL_TXT_DIR = "./datas/docs/gettyimages"
 GETTYIMAGES_LOG_PATH = "./logs/gettyimages.log"
@@ -56,17 +56,16 @@ GETTYIMAGES_PAGES = "1"  # max page is 100, cannot work with per_page
 
 
 # adobestock
-ADOBESTOCK_QUERY = "face"
+ADOBESTOCK_QUERY = "face"  # bare face, bare-face, nomakeup face
 ADOBESTOCK_IMAGE_DIR = "./datas/imgs/adobestock"
 ADOBESTOCK_IMAGE_URL_TXT_DIR = "./datas/docs/adobestock"
 ADOBESTOCK_LOG_PATH = "./logs/adobestock.log"
-ADOBESTOCK_PAGES = "1"  # max page is 100, cannot work with per_page
+ADOBESTOCK_PAGES = "1"  # max page is 100, 可以设置 per_page 但没有必要，按默认 100 即可，最大值也是 100
 
 
 # shutterstock
-SHUTTERSTOCK_QUERY = "face"
+SHUTTERSTOCK_QUERY = "face"  # bare face, nomakeup face
 SHUTTERSTOCK_IMAGE_DIR = "./datas/imgs/shutterstock"
 SHUTTERSTOCK_IMAGE_URL_TXT_DIR = "./datas/docs/shutterstock"
 SHUTTERSTOCK_LOG_PATH = "./logs/shutterstock.log"
 SHUTTERSTOCK_PAGES = "1"  # max page is 100, cannot work with per_page
-

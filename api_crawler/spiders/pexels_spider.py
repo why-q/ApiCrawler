@@ -1,7 +1,9 @@
 import json
-import scrapy
-import api_crawler.config as config
 from typing import Literal
+
+import scrapy
+
+import api_crawler.config as config
 
 
 class PexelsSpider(scrapy.Spider):

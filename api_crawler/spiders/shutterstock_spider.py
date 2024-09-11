@@ -23,10 +23,7 @@ class ShutterStockSpider(scrapy.Spider):
         "HTTPERROR_ALLOWED_CODES": [403],
     }
 
-    # TODO filter image type
-    base_url = (
-        "https://www.shutterstock.com/search/{query}?image_type=photo&page={page}"
-    )
+    base_url = "https://www.shutterstock.com/zh/search/{query}?image_type=photo&sort=relevant&mreleased=true&people_number=1&page={page}"
 
     def __init__(
         self,

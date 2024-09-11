@@ -21,8 +21,7 @@ class FreepikSpider(scrapy.Spider):
         "LOG_LEVEL": "DEBUG",
     }
 
-    # TODO filter image type
-    base_url = "https://www.freepik.com/search?format=search&last_filter=page&last_value={page}&page={page}&query={query}"
+    base_url = "https://www.freepik.com/search?ai=excluded&format=search&last_filter=page&last_value={page}&page={page}&people=include&people_range=1&query={query}&type=photo"
 
     header = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
@@ -93,13 +92,13 @@ class FreepikSpider(scrapy.Spider):
 
                     if image_url.startswith("https://img.freepik.com"):
                         """
-                            Each URL is like: `https://img.freepik.com/free-photo/close-up-portrait-green-eyed-dark-haired-woman-with-healthy-skin-cream-her-face-girl-without-makeup-white-wall_197531-13905.jpg?ga=GA1.1.1865334328.1725937059&semt=ais_hybrid`
+                        Each URL is like: `https://img.freepik.com/free-photo/close-up-portrait-green-eyed-dark-haired-woman-with-healthy-skin-cream-her-face-girl-without-makeup-white-wall_197531-13905.jpg?ga=GA1.1.1865334328.1725937059&semt=ais_hybrid`
 
-                            https://img.freepik.com/free-vector/makeup-accessories-background_23-2147806488.jpg?t=st=1725968846~exp=1725972446~hmac=04a966751fc0b274500ecbe6d480398497909c89d4b5664bfdd83342f561faac&w=1380
+                        https://img.freepik.com/free-vector/makeup-accessories-background_23-2147806488.jpg?t=st=1725968846~exp=1725972446~hmac=04a966751fc0b274500ecbe6d480398497909c89d4b5664bfdd83342f561faac&w=1380
 
-                            The id is: `197531-13905`
+                        The id is: `197531-13905`
 
-                            We use `re` to get it.
+                        We use `re` to get it.
                         """
                         id_match = re.search(r"_(\d+-\d+)\.jpg", image_url)
 
