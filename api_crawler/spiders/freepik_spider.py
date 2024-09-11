@@ -21,6 +21,7 @@ class FreepikSpider(scrapy.Spider):
         "LOG_LEVEL": "DEBUG",
     }
 
+    # TODO filter image type
     base_url = "https://www.freepik.com/search?format=search&last_filter=page&last_value={page}&page={page}&query={query}"
 
     header = {
