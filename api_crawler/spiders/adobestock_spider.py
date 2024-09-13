@@ -9,8 +9,8 @@ class AdobeStockSpider(scrapy.Spider):
     name = "adobestock"
     allowed_domains = ["adobe.com"]
     custom_settings = {
-        "IMAGES_STORE": config.ISTOCK_IMAGE_DIR,
-        "LOG_FILE": config.ISTOCK_LOG_PATH,
+        "IMAGES_STORE": config.ADOBESTOCK_IMAGE_DIR,
+        "LOG_FILE": config.ADOBESTOCK_LOG_PATH,
         "ITEM_PIPELINES": {"api_crawler.pipelines.AdobeStockPipeline": 1},
     }
 
@@ -25,8 +25,8 @@ class AdobeStockSpider(scrapy.Spider):
 
     def __init__(
         self,
-        query: str = config.ISTOCK_QUERY,
-        pages: str = config.ISTOCK_PAGES,  # "10" or "3-15"
+        query: str = config.ADOBESTOCK_QUERY,
+        pages: str = config.ADOBESTOCK_PAGES,  # "10" or "3-15"
         *args,
         **kwargs,
     ):

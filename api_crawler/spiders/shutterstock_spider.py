@@ -1,4 +1,6 @@
+import random
 import re
+import time
 
 import scrapy
 from scrapy import Request
@@ -21,6 +23,7 @@ class ShutterStockSpider(scrapy.Spider):
         "ITEM_PIPELINES": {"api_crawler.pipelines.ShutterStockPipeline": 1},
         "LOG_LEVEL": "DEBUG",
         "HTTPERROR_ALLOWED_CODES": [403],
+        "CONCURRENT_REQUESTS": 1,
     }
 
     base_url = "https://www.shutterstock.com/zh/search/{query}?image_type=photo&sort=relevant&mreleased=true&people_number=1&page={page}"
@@ -39,6 +42,8 @@ class ShutterStockSpider(scrapy.Spider):
         # options
         chrome_options = Options()
         chrome_options.add_argument("--disable-gpu")
+        chrome_options.add_argument("--disable-application-cache")
+        chrome_options.add_argument("--disable-cache")
 
         service = Service(executable_path="./driver/chromedriver.exe")
         self.driver = webdriver.Chrome(service=service, options=chrome_options)
@@ -56,6 +61,20 @@ class ShutterStockSpider(scrapy.Spider):
 
     def parse(self, response):
         try:
+            print("Setting browser...")
+
+            # # random user agent
+            # self.driver.execute_cdp_cmd(
+            #     "Network.setUserAgentOverride", {"userAgent": self.ua.random}
+            # )
+            # # clear all cookies
+            # self.driver.delete_all_cookies()
+
+            # random delay
+            time.sleep(random.uniform(10, 30))
+
+            print("Setted!")
+
             self.driver.get(response.url)
 
             wait = WebDriverWait(self.driver, 20)

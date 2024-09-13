@@ -10,12 +10,12 @@ class GettyImagesSpider(scrapy.Spider):
     name = "gettyimages"
     allowed_domains = ["gettyimages.com"]
     custom_settings = {
-        "IMAGES_STORE": config.ISTOCK_IMAGE_DIR,
-        "LOG_FILE": config.ISTOCK_LOG_PATH,
+        "IMAGES_STORE": config.GETTYIMAGES_IMAGE_DIR,
+        "LOG_FILE": config.GETTYIMAGES_LOG_PATH,
         "ITEM_PIPELINES": {"api_crawler.pipelines.GettyImagesPipeline": 1},
     }
 
-    base_url = "https://www.gettyimages.com/search/2/image?numberofpeople=one&phrase={query}&sort=best&suppressfamilycorrection=true&page={page}"
+    base_url = "https://www.gettyimages.com/search/2/image?excludenudity=false&alloweduse=availableforalluses&family=creative&mediatype=photography&numberofpeople=one&phrase={query}&sort=best&page={page}"
 
     header = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
@@ -26,8 +26,8 @@ class GettyImagesSpider(scrapy.Spider):
 
     def __init__(
         self,
-        query: str = config.ISTOCK_QUERY,
-        pages: str = config.ISTOCK_PAGES,  # "10" or "3-15"
+        query: str = config.GETTYIMAGES_QUERY,
+        pages: str = config.GETTYIMAGES_PAGES,  # "10" or "3-15"
         *args,
         **kwargs,
     ):
@@ -50,6 +50,8 @@ class GettyImagesSpider(scrapy.Spider):
     def start_requests(self):
         for page in self.pages:
             url = self.base_url.format(query=self.query, page=page)
+
+            print("Crawling: ", url)
             yield scrapy.Request(url, headers=self.header, callback=self.parse)
 
     def parse(self, response):
@@ -65,10 +67,25 @@ class GettyImagesSpider(scrapy.Spider):
                 src is like: https://media.gettyimages.com/id/600096494/zh/%E7%85%A7%E7%89%87/half-face-of-young-man.jpg?s=612x612&w=0&k=20&c=q5W_9Tl6QvG_NzBmcSXYbq3pnqzwAZOokYkc6Y4Kg0I=
 
                 id is: 600096494
+
+                other type of src is like: https://media.gettyimages.com/id/304872-003/ja/%E3%82%B9%E3%83%88%E3%83%83%E3%82%AF%E3%83%95%E3%82%A9%E3%83%88/portrait-of-bare-shouldered-man-raising-hands-to-face-b-w.jpg?s=612x612&w=0&k=20&c=mypSMaDBfVjNCa1T6whH_K2HPe34SCb7xeLzaYkHhXY=
+
+                id is: 304872-003
                 """
-                match = re.search(r"/id/(\d+)/", image_url)
-                if match:
-                    image_id = match.group(1)
+                match_1 = re.search(r"/id/(\d+)/", image_url)
+                match_2 = re.search(r"/id/(\d+)-(\d+)/", image_url)
+
+                if match_1:
+                    image_id = match_1.group(1)
+
+                    print("Found image: ", image_url)
+
+                    yield {
+                        "image_url": image_url,
+                        "image_id": image_id,
+                    }
+                elif match_2:
+                    image_id = f"{match_2.group(1)}-{match_2.group(2)}"
 
                     print("Found image: ", image_url)
 

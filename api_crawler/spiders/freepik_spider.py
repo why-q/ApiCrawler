@@ -1,3 +1,4 @@
+import random
 import re
 import time
 
@@ -65,7 +66,7 @@ class FreepikSpider(scrapy.Spider):
             self.driver.get(response.url)
 
             time.sleep(
-                10
+                random.uniform(10, 20)
             )  # Wait for page to load completely, since the website use lazy load.
 
             container = self.driver.find_element(

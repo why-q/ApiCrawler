@@ -169,10 +169,7 @@ class IstockImagePipeline(FreepikImagePipeline):
         if not txt_dir.exists():
             txt_dir.mkdir(parents=True, exist_ok=True)
 
-        self.txt_path = (
-            txt_dir
-            / f"{config.ISTOCK_QUERY.replace(' ', '-')}_{config.ISTOCK_PAGES}.txt"
-        )
+        self.txt_path = txt_dir / f"{config.ISTOCK_QUERY}_{config.ISTOCK_PAGES}.txt"
 
         self.img_dir = Path(img_dir)
         if not self.img_dir.exists():
@@ -218,8 +215,7 @@ class AdobeStockPipeline(FreepikImagePipeline):
             txt_dir.mkdir(parents=True, exist_ok=True)
 
         self.txt_path = (
-            txt_dir
-            / f"{config.ADOBESTOCK_QUERY.replace(' ', '-')}_{config.ADOBESTOCK_PAGES}.txt"
+            txt_dir / f"{config.ADOBESTOCK_QUERY}_{config.ADOBESTOCK_PAGES}.txt"
         )
 
         self.img_dir = Path(img_dir)
@@ -242,8 +238,7 @@ class ShutterStockPipeline(FreepikImagePipeline):
             txt_dir.mkdir(parents=True, exist_ok=True)
 
         self.txt_path = (
-            txt_dir
-            / f"{config.SHUTTERSTOCK_QUERY.replace(' ', '-')}_{config.SHUTTERSTOCK_PAGES}.txt"
+            txt_dir / f"{config.SHUTTERSTOCK_QUERY}_{config.SHUTTERSTOCK_PAGES}.txt"
         )
 
         self.img_dir = Path(img_dir)
