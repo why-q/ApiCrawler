@@ -67,6 +67,4 @@ scrapy crawl shutterstock
 
 ### 复制检测示例
 
-![](example/with_dual.png) 
-
-![](example/without_dual.png)
+<img src="example/with_dual.png" style="zoom: 33%;" /> <img src="example/without_dual.png" style="zoom:33%;" />
